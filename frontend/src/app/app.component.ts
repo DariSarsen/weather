@@ -1,9 +1,17 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { WeatherService } from './weather.service';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
+
+
+interface Weather {
+  city: string;
+  country: string;
+  temperature: number;
+  humidity: number;
+  description: string;
+  windSpeed: number;
+}
 
 
 @Component({
@@ -11,24 +19,24 @@ import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   standalone: true,
-  imports: [FormsModule, CommonModule, HttpClientModule], 
+  imports: [FormsModule, CommonModule]
 })
 export class AppComponent {
   city = '';
-  weather: any;
+  weather: Weather | null = null;
+
 
   constructor(private weatherService: WeatherService) { }
 
   getWeather(): void {
-    this.weatherService.getWeather(this.city).subscribe({
+    this.weatherService.getWeatherByCityName(this.city).subscribe({
       next: (data) => {
-        this.weather = data;
-        console.log(data);
+        this.weather = data.getWeatherByCityName;
       },
       error: (error) => {
         console.error('There was an error!', error);
+        this.weather = null;
       }
     });
   }
-  
 }

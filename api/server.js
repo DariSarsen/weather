@@ -11,8 +11,10 @@ const port = process.env.PORT || 3000;
 const typeDefs = gql`
   type Weather {
     city: String
+    country: String
     temperature: Float
     humidity: Int
+    windSpeed: Float
     description: String
   }
 
@@ -26,13 +28,13 @@ const resolvers = {
     getWeatherByCityName: async (_, { city }) => {
       try {
         const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.OPENWEATHER_API_KEY}&units=metric`);
-        const { name, main, weather } = response.data;
+        const { name, main, weather, sys, wind } = response.data;
         return {
           city: name,
-          country: weather.sys.country,
+          country: sys.country,
           temperature: main.temp,
           humidity: main.humidity,
-          windSpeed: weather.wind.speed,
+          windSpeed: wind.speed,
           description: weather.length > 0 ? weather[0].description : null,
         };
       } catch (error) {
@@ -45,7 +47,6 @@ const resolvers = {
 
 const server = new ApolloServer({ typeDefs, resolvers });
 server.start().then(() => {
-    // Apply Apollo GraphQL middleware and set the path to /graphql
     server.applyMiddleware({ app, path: '/graphql' });
   
     app.use(cors({
@@ -56,4 +57,4 @@ server.start().then(() => {
     app.listen(port, () => {
         console.log(`Server is running on port ${port}`);
     });
-  });
+});
