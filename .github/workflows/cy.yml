@@ -32,6 +32,10 @@ jobs:
     - name: Install Frontend Dependencies
       run: cd frontend && npm install
 
+    
+    - name: Cypress install
+      uses: cypress-io/github-action@v6
+
     - name: Run Frontend E2E Tests
       uses: cypress-io/github-action@v6
         with:
