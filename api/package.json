@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "mocha --reporter spec tests/*.test.js && npm run stop-server",
+    "test": "mocha --reporter spec --watch=false --browsers=ChromeHeadless tests/*.test.js && npm run stop-server",
     "start": "node server.js"
   },
   "keywords": [],
