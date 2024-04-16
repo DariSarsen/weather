@@ -5,39 +5,30 @@ on: [push]
 jobs:
   backend-tests:
     runs-on: ubuntu-latest
-    services:
-      api:
-        image: api
-        ports:
-          - 3000:3000
-        env:
-          OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
 
     steps:
     - uses: actions/checkout@v2
 
-    - name: Set up Docker Environment
-      run: docker-compose up -d api
+    - name: Install Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install Backend Dependencies
+      run: cd api && npm install
 
     - name: Run Backend Unit Tests
-      run: docker-compose exec api npm test
+      run: cd api && npm test
 
   frontend-tests:
     needs: backend-tests
     runs-on: ubuntu-latest
-    services:
-      frontend:
-        image: frontend
-        ports:
-          - 80:80
-        env:
-          API_URL: http://localhost:3000/graphql
 
     steps:
     - uses: actions/checkout@v2
 
-    - name: Set up Docker Environment
-      run: docker-compose up -d frontend
+    - name: Install Frontend Dependencies
+      run: cd frontend && npm install
 
     - name: Run Frontend E2E Tests
-      run: docker-compose exec frontend npm run cypress:run
+      run: cd frontend && npm run cy:run
