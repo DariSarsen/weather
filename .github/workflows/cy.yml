@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - name: Install Node.js
       uses: actions/setup-node@v2
@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - name: Install Frontend Dependencies
       run: cd frontend && npm install
@@ -35,7 +35,7 @@ jobs:
     - name: Run Frontend E2E Tests
       uses: cypress-io/github-action@v6
       with:
-        working-directory: ./frontend # Укажите путь к каталогу, где находится package-lock.json
+        working-directory: ./frontend 
         build: npm run build
         start: npm start
         browser: edge
