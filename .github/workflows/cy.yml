@@ -21,7 +21,6 @@ jobs:
       run: |
         cd api
         npm test
-        kill $(lsof -t -i:3000)
 
 
   frontend-tests:
