@@ -38,6 +38,5 @@ jobs:
         working-directory: ./frontend 
         build: npm run build
         start: npm start
-        wait-on: "http://localhost:3000"
 
       # run: cd frontend && npm run cypress:run
