@@ -34,4 +34,4 @@ jobs:
       run: cd frontend && npm install
 
     - name: Run Frontend E2E Tests
-      run: cd frontend && npm run cyprees:run
+      run: cd frontend && npm run cypress:run
