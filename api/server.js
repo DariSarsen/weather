@@ -7,7 +7,6 @@ const { ApolloServer, gql } = require('apollo-server-express');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Define GraphQL Schema
 const typeDefs = gql`
   type Weather {
     city: String
@@ -46,15 +45,21 @@ const resolvers = {
 };
 
 const server = new ApolloServer({ typeDefs, resolvers });
-server.start().then(() => {
-    server.applyMiddleware({ app, path: '/graphql' });
-  
-    app.use(cors({
-        origin: ['http://localhost:4200', 'http://localhost:80', 'http://localhost'],
-        methods: "*",
-    }));
-  
-    app.listen(port, () => {
-        console.log(`Server is running on port ${port}`);
-    });
-});
+
+async function startServer() {
+  await server.start();
+  server.applyMiddleware({ app, path: '/graphql' });
+
+  app.use(cors({
+      origin: ['http://localhost:4200', 'http://localhost:80', 'http://localhost'],
+      methods: "*",
+  }));
+
+  app.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
+  });
+}
+
+startServer();
+
+module.exports = app; 
