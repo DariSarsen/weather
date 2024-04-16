@@ -1,0 +1,43 @@
+name: Continuous Integration
+
+on: [push]
+
+jobs:
+  backend-tests:
+    runs-on: ubuntu-latest
+    services:
+      api:
+        image: api
+        ports:
+          - 3000:3000
+        env:
+          OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Docker Environment
+      run: docker-compose up -d api
+
+    - name: Run Backend Unit Tests
+      run: docker-compose exec api npm test
+
+  frontend-tests:
+    needs: backend-tests
+    runs-on: ubuntu-latest
+    services:
+      frontend:
+        image: frontend
+        ports:
+          - 80:80
+        env:
+          API_URL: http://localhost:3000/graphql
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Docker Environment
+      run: docker-compose up -d frontend
+
+    - name: Run Frontend E2E Tests
+      run: docker-compose exec frontend npm run cypress:run
