@@ -21,11 +21,10 @@ jobs:
       run: |
         cd api
         npm test
-        kill $(lsof -t -i:3000)
+        cd ..
 
 
   frontend-tests:
-    needs: backend-tests
     runs-on: ubuntu-latest
 
     steps:
@@ -35,4 +34,4 @@ jobs:
       run: cd frontend && npm install
 
     - name: Run Frontend E2E Tests
-      run: cd frontend && npm run cyprees:run
+      run: cd frontend && npm run cypress:run
