@@ -21,7 +21,6 @@ jobs:
       run: |
         cd api
         npm test
-        cd ..
 
 
   frontend-tests:
@@ -34,4 +33,9 @@ jobs:
       run: cd frontend && npm install
 
     - name: Run Frontend E2E Tests
-      run: cd frontend && npm run cypress:run
+      uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npm start
+          browser: edge
+      # run: cd frontend && npm run cypress:run
