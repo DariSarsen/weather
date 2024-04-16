@@ -32,14 +32,12 @@ jobs:
     - name: Install Frontend Dependencies
       run: cd frontend && npm install
 
-    
-    - name: Cypress install
-      uses: cypress-io/github-action@v6
-
     - name: Run Frontend E2E Tests
       uses: cypress-io/github-action@v6
       with:
+        working-directory: ./frontend # Укажите путь к каталогу, где находится package-lock.json
         build: npm run build
         start: npm start
         browser: edge
+
       # run: cd frontend && npm run cypress:run
