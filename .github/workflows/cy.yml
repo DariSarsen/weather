@@ -38,8 +38,8 @@ jobs:
 
     - name: Run Frontend E2E Tests
       uses: cypress-io/github-action@v6
-        with:
-          build: npm run build
-          start: npm start
-          browser: edge
+      with:
+        build: npm run build
+        start: npm start
+        browser: edge
       # run: cd frontend && npm run cypress:run
