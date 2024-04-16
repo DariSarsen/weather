@@ -18,7 +18,11 @@ jobs:
       run: cd api && npm install
 
     - name: Run Backend Unit Tests
-      run: cd api && npm test
+      run: |
+        cd api
+        npm test
+        kill $(lsof -t -i:3000)
+
 
   frontend-tests:
     needs: backend-tests
