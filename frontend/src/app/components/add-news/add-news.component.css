@@ -1,0 +1,110 @@
+h1 {
+    margin: 50px 0;
+    text-align: center;
+    color: #fff;
+}
+
+.news-add-form {
+    background-color: #fff;
+    color: #000;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-bottom: 100px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.form-group {
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: small;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+    font-family: "Quicksand", Calibri;
+    width: calc(100% - 20px);
+    border-radius: 4px;
+    padding: 10px;
+    display: block;
+    border: none;
+    outline: 0;
+    border-bottom: 2px solid #bebebe;
+    transition: all 0.5s ease-in-out;
+}
+
+.form-group input[type="text"]:hover,
+.form-group textarea:hover {
+    border-bottom: 2px solid rgb(12, 129, 114);
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+    border-bottom: 2px solid rgb(12, 129, 114);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+button[type="submit"] {
+    background-color: rgb(14, 175, 154);
+    border-radius: 20px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+}
+
+button[type="submit"]:hover {
+    background-color: rgb(12, 129, 114);
+}
+
+.form-group img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px auto;
+    border-radius: 4px;
+}
+
+.file-upload {
+    width: calc(100% - 20px);
+    padding: 6px 12px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-family: "Quicksand", Calibri;
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+    .news-edit-form {
+        margin: auto;
+        padding: 15px;
+        margin-bottom: 50px;
+    }
+
+    .form-group {
+        padding: 5px;
+    }
+
+    .form-group label {
+        font-size: smaller;
+    }
+
+    button[type="submit"] {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .file-upload {
+        width: 100%;
+    }
+}

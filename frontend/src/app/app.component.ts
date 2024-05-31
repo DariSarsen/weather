@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { WeatherService } from './weather.service';
-import { FormsModule } from '@angular/forms';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { NgFor } from '@angular/common';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 interface Weather {
@@ -19,7 +22,7 @@ interface Weather {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   standalone: true,
-  imports: [FormsModule, CommonModule]
+  imports: [NgFor, CommonModule, RouterOutlet, RouterLink, RouterLinkActive, NavbarComponent, FooterComponent],
 })
 export class AppComponent {
   city = '';

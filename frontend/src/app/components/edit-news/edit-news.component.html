@@ -1,0 +1,33 @@
+<h1>Edit News</h1>
+
+<form class="news-edit-form" (ngSubmit)="updateThisNews()">
+  <div class="section">
+    <div class="form-group">
+      <label for="newsName">News Name:</label>
+      <input type="text" id="newsName" placeholder="Title" name="title" [(ngModel)]="editedNews.title" required>
+    </div>
+
+    <div class="form-group">
+      <label for="newsAuthor">Author:</label>
+      <input type="text" id="newsAuthor" placeholder="Author" name="author" [(ngModel)]="editedNews.author" required>
+    </div>
+
+    
+    <div class="form-group">
+        <label for="newsDate">Publication date:</label>
+        <input type="text" id="newsDate" placeholder="Date" name="date" [(ngModel)]="editedNews.date" required>
+    </div>
+
+    <div class="form-group">
+      <label for="newsDescription">Description:</label>
+      <textarea id="newsDescription" placeholder="Description" name="description" [(ngModel)]="editedNews.description" rows="4" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="newsImage">News Image: {{editedNews.imageUrls}}</label>
+      <input type="file" id="newsImage" name="images" class="file-upload" multiple (change)="onFileSelected($event)">
+    </div>
+
+    <button type="submit">Save Changes</button>
+  </div>
+</form>

@@ -1,1 +1,39 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'ngx-toastr/toastr';
+
+
+body{
+    font-family: "Quicksand", Calibri;
+    background: linear-gradient(rgb(17, 174, 153), white); 
+    margin: 0;
+}
+
+
+button {
+    background-color: rgb(19, 188, 166);
+    font-weight: bold;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    
+    transition: all 0.5s ease-in-out
+}
+button:hover{
+    background-color: rgb(16, 131, 116);
+}
+
+.square{
+    width: 12px;
+    height: 12px;
+    background-color: rgb(17, 174, 153);
+    margin-right: 10px;
+    align-self: center;
+  }
+
+a{
+    color: rgb(12, 104, 92); 
+}
+
+a:hover{
+    color: rgb(9, 81, 71);   
+}
