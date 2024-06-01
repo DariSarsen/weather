@@ -7,6 +7,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Observable } from 'rxjs';
+import { WeatherService } from '../../weather.service';
+
+interface Weather {
+  city: string;
+  country: string;
+  temperature: number;
+  humidity: number;
+  description: string;
+  windSpeed: number;
+}
 
 @Component({
   selector: 'app-news',
@@ -19,9 +29,11 @@ import { Observable } from 'rxjs';
 export class NewsComponent implements OnInit {
   news: any | null = null;
   slideIndex = 1;
+  city = '';
+  weather: Weather | null = null;
 
 
-  constructor(private newsService: NewsService, private toastr: ToastrService, private router: Router, private authService: AuthService) {
+  constructor(private weatherService: WeatherService, private newsService: NewsService, private toastr: ToastrService, private router: Router, private authService: AuthService) {
   }
   
   ngOnInit(): void {
@@ -48,5 +60,19 @@ export class NewsComponent implements OnInit {
         this.toastr.success('News removed successfully');  
         this.getNews();
       });
+  }
+
+
+
+  getWeather(): void {
+    this.weatherService.getWeatherByCityName(this.city).subscribe({
+      next: (data) => {
+        this.weather = data.getWeatherByCityName;
+      },
+      error: (error) => {
+        console.error('There was an error!', error);
+        this.weather = null;
+      }
+    });
   }
 }

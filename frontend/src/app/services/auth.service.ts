@@ -1,33 +1,34 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap, catchError } from 'rxjs';
+import { Observable, tap, catchError, BehaviorSubject } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private apiUrl = 'http://localhost:3000/auth';
-  user: any | null = null;
+  private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
 
   constructor(private http: HttpClient) { 
-    const userData = localStorage.getItem('user');
-    console.log('userData:', userData);
-    // localStorage.removeItem('user');
-    if (userData !== null) {
-      this.user = JSON.parse(userData);
-      console.log(this.user);
-    }
   }
   
-  isLoggedIn(): boolean {
-    return !!this.user;
+  getToken(): string | null {
+    return sessionStorage.getItem('token');
   }
-  
+
+  isLoggedIn(): Observable<boolean> {
+    return this.loggedIn.asObservable();
+  }
+
   logout(): void {
-    this.user = null;
-    console.log("this user: ", this.user)
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('userEmail');
+    window.location.reload();
+  }
+
+  hasToken(): boolean {
+    return !!sessionStorage.getItem('token');
   }
 
   register(user: any): Observable<any> {
@@ -46,10 +47,10 @@ export class AuthService {
     const url = `${this.apiUrl}/login`;
     return this.http.post(url, credentials).pipe(
       tap((response: any) => {
-        this.user = response.user;
         localStorage.setItem('token', response.token);
         localStorage.setItem('tokenExpiration', response.expirationTime);
         localStorage.setItem('user', JSON.stringify(response.user));
+        window.location.reload();
       }),
       catchError(error => {
         throw error;

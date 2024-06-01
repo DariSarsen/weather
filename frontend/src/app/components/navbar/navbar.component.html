@@ -8,8 +8,11 @@
         <ul>
             <li><a href="/">All News</a></li>
             <li><a href="/news/addnew">Add News</a></li>
-            <li><a href="/register">Register</a></li>
-            <li><a href="/login">Login</a></li>
+            <li><a *ngIf="!(isLoggedIn$ | async)" href="/register">Register</a></li>
+            <li><a *ngIf="!(isLoggedIn$ | async)" href="/login">Login</a></li>
+
+            <button *ngIf="isLoggedIn$ | async" (click)="logout()">Выйти</button>
         </ul>
+        <div class="username" *ngIf="isLoggedIn$ | async">Hello, {{ username }}</div>
     </nav>
 </div>

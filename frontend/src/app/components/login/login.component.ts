@@ -18,8 +18,9 @@ export class LoginComponent {
     const credentials = { email, password };
     this.authService.login(credentials).subscribe({
       next: (response) => {
+        sessionStorage.setItem('token', response.token);
+        sessionStorage.setItem('userEmail', response.user.email);
         this.toastr.success('Аутентификация успешна!', 'Успех');
-        this.router.navigate(['/dashboard']);
       },
       error: (error) => {
         if (error.status === 401) {

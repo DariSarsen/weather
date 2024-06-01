@@ -16,7 +16,6 @@ export class RegisterComponent {
   constructor(private toastr: ToastrService, private authService: AuthService, private router: Router) { }
 
   register( email: string, password: string): void {
-    console.log("hi register");
     const user = { email, password };
     this.authService.register(user).subscribe({
       next: (response) => {
