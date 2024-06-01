@@ -1,0 +1,74 @@
+<div class="component">
+  <h2>Weather App</h2> 
+  <input type="text" [(ngModel)]="city" data-testid="input-city" placeholder="Enter city">
+  <button style="width: 50%;" (click)="getWeather()" data-testid="get-weather-btn">Посмотреть погоду</button>
+  
+  <div class="weather-details" *ngIf="weather">
+    <div class="weather-city">{{ weather.city }}, {{ weather.country }}</div>
+    <div class="weather-condition">{{ weather.description }}</div>
+
+    <div class="weather-card-details">
+      <div class="weather-card">
+        <p>Temperature</p>
+        <div>{{ weather.temperature }} °C</div>
+      </div>
+  
+      <div class="weather-card">
+        <p>Humidity</p>
+        <div>{{ weather.humidity }}%</div>
+      </div>
+  
+      <div class="weather-card">
+        <p>Wind Speed</p>
+        <div>{{ weather.windSpeed }} m/s</div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+
+<h1>News</h1>
+
+
+<div class="news">
+  <a href="/news/addnew" class="addBtn">Add News</a>
+
+
+  <div class="section" *ngFor="let new of news">
+      <div class="info">
+        <div class="news-name">
+          {{ new.title }}
+          <div class="small">
+            {{ new.author }} || {{ new.date }}
+          </div>
+        </div>
+  
+        <div class="description">{{ new.description }}</div>
+
+        
+        <!-- Кнопки изменения и удаления -->
+        <div class="buttons">
+          <button (click)="editNews(new._id)">Изменить</button>
+          <button (click)="deleteNews(new._id)">Удалить</button>
+        </div>
+      </div>
+
+
+      <div class="swiper">
+        <swiper-container
+        autoplay-delay="2000" 
+        effect="fade" 
+        navigation-prevEl='.swiper-button-prev' 
+        navigation-nextEl='.swiper-button-next'
+        >
+          <swiper-slide *ngFor="let imageName of new.imageUrls" >
+            <img src="http://localhost:3000/{{ imageName }}" alt="news image">
+          </swiper-slide>
+         
+        </swiper-container>
+      </div>
+       
+  </div>
+</div>
