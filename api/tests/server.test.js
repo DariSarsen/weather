@@ -1,12 +1,13 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const app = require('../server'); 
+const { app, server } = require('../server'); 
 
 const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe('Weather API', () => {
+describe('Weather API', function() {
+  this.timeout(5000);
   describe('GET /graphql', () => {
     it('should return weather data for a given city', (done) => {
       chai.request(app)
@@ -38,4 +39,9 @@ describe('Weather API', () => {
     });
 
   });
-});
+
+  after(() => {
+    server.stop(), 5000;
+    });
+  });
+
