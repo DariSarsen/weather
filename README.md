@@ -1,5 +1,5 @@
 # Hello
-This is a simple weather-api, based on stack mean, with docker-compose. And Weather data is taken through a third-party REST API - the OpenWeather API
+This is a simple weather-api, based on stack mean, with docker-compose. And Weather data is taken through a third-party REST API - the OpenWeather API. This project realized just for learning MEAN Stack ^^
 
 # Frontend
 
